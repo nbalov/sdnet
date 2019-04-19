@@ -1,0 +1,46 @@
+
+importClassesFrom(methods, ANY, character, list, logical, matrix, missing, "NULL", numeric, vector)
+importFrom("methods", "callGeneric", "as", "is", "isVirtualClass", "new", "validObject", "slotNames")
+importFrom("stats", "rbinom", "runif", "quantile", "median", "setNames")
+importFrom("utils", "packageVersion", "read.csv", "read.table", "str")
+importFrom("graphics", "par", "plot")
+
+exportClasses(catNetwork, catNetworkEvaluate, dagEvaluate, catNetworkDistance, CPDAG)
+
+useDynLib(sdnet, .registration = TRUE)
+
+exportMethods(
+	cnNumNodes, cnNodes, 
+	cnSubNetwork, cnReorderNodes, 
+	cnEdges, cnMatEdges, 
+	cnParents, cnMatParents, 		
+	cnProb, cnPlotProb, cnSetProb, 
+	cnNodeMarginalProb, cnJointProb, cnCondProb, 
+	cnComplexity, cnOrder, 
+	cnPlot, cnDot,
+	cnSamples, 
+	cnLoglik, cnNodeLoglik, 
+	cnFind, cnFindAIC, cnFindBIC, cnFindKL, 
+	cnPredict, 
+	cnKLComplexity, 
+	cnCompare, 
+	cnParHist, 
+	cnCluster, cnClusterSep
+	)
+
+export(
+        sdnLearn, sdnPredict, sdnEvaluate, 
+	cnNew, cnRandomCatnet, 
+        cnCatnetFromSif, cnCatnetFromBif, cnCatnetFromXdsl, 
+	cnCatnetFromEdges, 
+	isDAG, dag2cpdag, 
+	cnNodeSampleLoglik, cnNodeSampleProb, 
+	cnDiscretize, 
+	cnSearchOrder, 
+	cnSearchHist,
+	cnEntropy, cnEntropyOrder, 
+	cnEdgeDistanceKL, cnEdgeDistancePearson, 
+	cnClusterMI, 
+	cnPearsonTest,
+	cnSetSeed)
+
