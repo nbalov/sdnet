@@ -206,7 +206,6 @@ SEXP show_catnet(SEXP rnodes, SEXP rparents, SEXP rcatlist, SEXP rproblist)
 	PROTECT(rparents = AS_LIST(rparents));
 	PROTECT(rcatlist = AS_LIST(rcatlist));
 	PROTECT(rproblist = AS_LIST(rproblist));
-
 	PROTECT(pstr = allocVector(STRSXP, 3));
 
 	m_numNodes = length(rnodes);
@@ -497,7 +496,7 @@ SEXP catnetSetProb(SEXP cnet, SEXP rSamples, SEXP rPerturbations) {
 	pPerturbations = 0;
 	if(!isNull(rPerturbations)) {
 		PROTECT(rPerturbations = AS_INTEGER(rPerturbations));
-		pPerturbations = INTEGER(rPerturbations);
+		pPerturbations = INTEGER_POINTER(rPerturbations);
 	}
 
 	if(isInteger(rSamples)) {
@@ -549,7 +548,7 @@ SEXP catnetSetProb(SEXP cnet, SEXP rSamples, SEXP rPerturbations) {
 			}
 		}
 
-		UNPROTECT(1); /* pSamples */
+		UNPROTECT(1); /* rSamples */
 		if(pSubSamples)
 			CATNET_FREE(pSubSamples);
 
@@ -641,14 +640,13 @@ SEXP catnetLoglik(SEXP cnet, SEXP rSamples, SEXP rPerturbations, SEXP rBySample)
 	UNPROTECT(1);
 
 	////////////////////////////////////////
-	// Danger Ahead
 	// We don's check that sample nodes actually correspond to the cnet's nodes
 	// Missmatch of cats possible
 
 	pPerturbations = 0;
 	if(!isNull(rPerturbations)) {
 		PROTECT(rPerturbations = AS_INTEGER(rPerturbations));
-		pPerturbations = INTEGER(rPerturbations);
+		pPerturbations = INTEGER_POINTER(rPerturbations);
 	}
 
 	if(isInteger(rSamples)) {
@@ -810,7 +808,7 @@ SEXP catnetNodeLoglik(SEXP cnet, SEXP rNode, SEXP rSamples, SEXP rPerturbations,
 			floglik = -FLT_MAX;
 			if(!isNull(rPerturbations)) {
 				PROTECT(rPerturbations = AS_INTEGER(rPerturbations));
-				pPerturbations = INTEGER(rPerturbations);
+				pPerturbations = INTEGER_POINTER(rPerturbations);
 				pSubSamples = (int*)CATNET_MALLOC(numnodes*numsamples*sizeof(int));
 				if (pSubSamples) {
 					numsubsamples = 0;
@@ -864,7 +862,7 @@ SEXP catnetNodeLoglik(SEXP cnet, SEXP rNode, SEXP rSamples, SEXP rPerturbations,
 			floglik = -FLT_MAX;
 			if(!isNull(rPerturbations)) {
 				PROTECT(rPerturbations = AS_INTEGER(rPerturbations));
-				pPerturbations = INTEGER(rPerturbations);
+				pPerturbations = INTEGER_POINTER(rPerturbations);
 				pSubSamples = (double*)CATNET_MALLOC(nlines*numsamples*sizeof(int));
 				if (pSubSamples) {
 					numsubsamples = 0;
