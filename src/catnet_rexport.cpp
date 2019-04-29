@@ -270,11 +270,11 @@ SEXP showCatnet(SEXP cnet)
 	//if(isS4(cnet))
 	//	Rprintf("cnet is an object\n");
 
-	rnodes = GET_SLOT(cnet, install("nodes"));
+	rnodes    = GET_SLOT(cnet, install("nodes"));
 	//if(IS_VECTOR(m_nodeNames))
 	//	Rprintf("m_nodeNames is a vector\n");
-	rparents = GET_SLOT(cnet, install("pars"));
-	rcatlist = GET_SLOT(cnet, install("cats"));
+	rparents  = GET_SLOT(cnet, install("pars"));
+	rcatlist  = GET_SLOT(cnet, install("cats"));
 	rproblist = GET_SLOT(cnet, install("probs"));
 
 	if(rnodes == R_NilValue || rparents == R_NilValue || rcatlist == R_NilValue || rproblist == R_NilValue) {
