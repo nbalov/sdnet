@@ -24,6 +24,10 @@
  *      Author: nbalov
  */
 
+/* 
+ * version 2.4.2  20may2019
+ */
+
 #include "utils.h"
 
 extern "C" {
@@ -381,7 +385,9 @@ inline void _umm(double *pdata, double *pSampleWeights, int ndata, int numCats, 
 	CATNET_FREE(pwc);
 }
 
-SEXP catnetSoftQuant(SEXP rSamples, SEXP rSampleWeights, SEXP rNumCats, SEXP rLearnset, SEXP rCover, SEXP rMode, SEXP rMaxiter, SEXP rEps) {
+SEXP catnetSoftQuant(SEXP rSamples, SEXP rSampleWeights, 
+	SEXP rNumCats, SEXP rLearnset, SEXP rCover, SEXP rMode, 
+	SEXP rMaxiter, SEXP rEps) {
 
 	int gmode, nnode, numSamples, numNodes, *pNumCats, numCats, c, j, maxiter, nLearnset, ndataline, *pLearnset;
 	double *pSamples, *pSampleWeights, *prow, *pdata, fCover, fsum, *pallmu, *pmu, *pallsig, *psig, *pallw, *pw, pp, pmax, feps; 

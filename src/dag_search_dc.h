@@ -24,6 +24,10 @@
  *      Author: nbalov
  */
 
+/* 
+ * version 2.4.2  20may2019
+ */
+
 /* Implements dag_search with different node categories 
  */
 
@@ -883,7 +887,7 @@ public:
 							}
 						}
 						if(pcomblist[k])
-			            			CATNET_FREE(pcomblist[k]); 				           							pcomblist[k] = paux;
+			      	CATNET_FREE(pcomblist[k]); 				           							pcomblist[k] = paux;
 					}
 				}
 

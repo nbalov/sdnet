@@ -24,6 +24,10 @@
  *      Author: nbalov
  */
 
+/* 
+ * version 2.4.2  20may2019
+ */
+
 #include "utils.h"
 #include "rcatnet.h"
 #include "rcatnet_search.h"
@@ -434,10 +438,10 @@ SEXP searchSA(SEXP rNodeNames, SEXP rSamples, SEXP rPerturbations,
 }
 
 SEXP catnetParHistogram(SEXP rSamples, SEXP rPerturbations, 
-			SEXP rMaxParents, SEXP rParentSizes, SEXP rMaxComplexity, SEXP rNodeCats, 
-			SEXP rParentsPool, SEXP rFixedParentsPool, 
-			SEXP rScore, SEXP rWeight, SEXP rMaxIter,
-			SEXP rThreads, SEXP rUseCache, SEXP rEcho)
+	SEXP rMaxParents, SEXP rParentSizes, SEXP rMaxComplexity, SEXP rNodeCats, 
+	SEXP rParentsPool, SEXP rFixedParentsPool, 
+	SEXP rScore, SEXP rWeight, SEXP rMaxIter,
+	SEXP rThreads, SEXP rUseCache, SEXP rEcho)
 {
 	//if(!isMatrix(rSamples))
 	//	error("Data is not a matrix");
@@ -738,7 +742,8 @@ SEXP catnetLoglik(SEXP cnet, SEXP rSamples, SEXP rPerturbations, SEXP rBySample)
 }
 
 
-SEXP catnetNodeLoglik(SEXP cnet, SEXP rNode, SEXP rSamples, SEXP rPerturbations, SEXP rKlmode) {
+SEXP catnetNodeLoglik(SEXP cnet, SEXP rNode, SEXP rSamples, 
+	SEXP rPerturbations, SEXP rKlmode) {
 
 	int *pPerturbations;
 	int numsamples, numnodes, numsubsamples, i, j, nnode, nnodes, *pnodes, nlines, klmode;
