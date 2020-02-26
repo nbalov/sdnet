@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2019  Nikolay Balov
+ *  Copyright (C) 2009--2011  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
  */
 
 /* 
- * version 2.4.2  20may2019
+ * version 2.4.2  25feb2020
  */
 
 /* Implements dag_search with different node categories 
@@ -876,18 +876,19 @@ public:
 				if (!pcomblist)
 					break;
 
-			        if(fixparsetsize > 0) {
-			        	for(k = 0; k < ncomblist; k++) {
-			            		paux = (int*)CATNET_MALLOC(d*sizeof(int));
+			    if(fixparsetsize > 0) {
+			        for(k = 0; k < ncomblist; k++) {
+			            paux = (int*)CATNET_MALLOC(d*sizeof(int));
 						if (paux) {
 							for(j = 0; j < fixparsetsize; j++)
-				            			paux[j] = fixparset[j];
-					        	if(pcomblist[k] && d > fixparsetsize) {
-				            			memcpy(paux + fixparsetsize, pcomblist[k], (d-fixparsetsize)*sizeof(int));
+				            	paux[j] = fixparset[j];
+					        if(pcomblist[k] && d > fixparsetsize) {
+				            	memcpy(paux + fixparsetsize, pcomblist[k], (d-fixparsetsize)*sizeof(int));
 							}
 						}
 						if(pcomblist[k])
-			      	CATNET_FREE(pcomblist[k]); 				           							pcomblist[k] = paux;
+			            	CATNET_FREE(pcomblist[k]);
+						pcomblist[k] = paux;
 					}
 				}
 
@@ -985,9 +986,9 @@ public:
 					pDagPars = m_dagPars;
 					pCurDag  = pCurDagList;
 					bSavePars = 0;
-int kk=0;
+
 					while(pCurDag) {
-kk++;
+
 						i = pCurDag->getNumPars(nnode);
 						j = nodecomplx - m_parComplx[nnode][i];
 						if(j <= 0) {

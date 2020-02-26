@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2019  Nikolay Balov
+ *  Copyright (C) 2009--2010  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -264,7 +264,7 @@ SEXP RCatnetSearchSA::search(SEXP rNodeNames, SEXP rSamples,
 	const char *pstr;
 	char **pNodeNames;
 
-	double *matEdgeLiks, *pMatEdgeLiks, ordProb, *newOrdProb, *pDirProbs, 
+	double *matEdgeLiks, *pMatEdgeLiks, *newOrdProb, *pDirProbs, 
 	       *matNodeCondLiks, *pNodeCondLiks;
 	
 	RCatnet rcatnet;
@@ -464,7 +464,6 @@ SEXP RCatnetSearchSA::search(SEXP rNodeNames, SEXP rSamples,
 		Rprintf("\n");
 	}
 
-	ordProb = 0;
 	niter = 0;
 	while (niter < maxIter) {
 
@@ -530,7 +529,7 @@ SEXP RCatnetSearchSA::search(SEXP rNodeNames, SEXP rSamples,
 
 			if (!isNull(rPerturbations)) {
 				pPerturbations = m_pSearchParams[n]->m_pPerturbations;
-				pRperturbations = INTEGER_POINTER(rPerturbations);
+				pRperturbations = INTEGER(rPerturbations);
 				for (j = 0; j < m_numSamples; j++) {
 					for (i = 0; i < m_numNodes; i++)
 						pPerturbations[j * m_numNodes + i] = pRperturbations[j
@@ -734,7 +733,6 @@ SEXP RCatnetSearchSA::search(SEXP rNodeNames, SEXP rSamples,
 					memset(pCatnets, 0, nCatnets * sizeof(CATNETD<double>*));
 					memcpy(m_pOptOrder, m_pTestOrder[n], m_numNodes * sizeof(int));
 					stepaccept++;
-					ordProb = newOrdProb[n];
 				} else { 
 					deltaLogLik = fLogLik - fOptLogLik;
 					acceptprob = 0;
@@ -776,7 +774,6 @@ SEXP RCatnetSearchSA::search(SEXP rNodeNames, SEXP rSamples,
 							else
 								Rprintf(" with prob %f < %f\n", ftemp, acceptprob);
 						}
-						ordProb = newOrdProb[n];
 
 						stepaccept++;
 						stepiters = n + 1;

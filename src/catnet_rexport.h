@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2019  Nikolay Balov
+ *  Copyright (C) 2009--2010  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,14 +17,21 @@
  *  http://www.gnu.org/licenses/gpl-2.0.html
  */
 
+/*
+ * catnet_rexport.h
+ *
+ *  Created on: Sep 21, 2009
+ *      Author: nbalov
+ */
+
+/* 
+ * version 2.4.2  25feb2020
+ */
+
 #include <Rinternals.h>
 #include <Rdefines.h>
 #include <Rmath.h>
 #include <R_ext/Rdynload.h>
-
-/* 
- * version 2.4.2  20may2019
- */
 
 /* these are called by R-functions directly */
 
@@ -35,9 +42,11 @@ SEXP catnetJointProb(SEXP cnet, SEXP rnode);
 SEXP catnetFindParentPool(SEXP cnet, SEXP rnode);
 SEXP showCatnet(SEXP cnet);
 SEXP searchOrder(SEXP rSamples, SEXP rPerturbations, 
-	SEXP rMaxParents, SEXP rParentSizes, SEXP rMaxComplexity, SEXP rOrder, SEXP rNodeCats, 
+	SEXP rMaxParents, SEXP rParentSizes, 
+	SEXP rMaxComplexity, SEXP rOrder, SEXP rNodeCats, 
 	SEXP rParentsPool, SEXP rFixedParentsPool, SEXP rMatEdgeLiks, 
-	SEXP rUseCache, SEXP rEcho, SEXP rDagOrCatnet, SEXP rClasses, SEXP rClsdist);
+	SEXP rUseCache, SEXP rEcho, SEXP rDagOrCatnet, 
+	SEXP rClasses, SEXP rClsdist);
 SEXP searchSA(SEXP rNodeNames, SEXP rSamples, SEXP rPerturbations, 
 	SEXP rMaxParents, SEXP rParentSizes, SEXP rMaxComplexity, SEXP rNodeCats, 
 	SEXP rParentsPool, SEXP rFixedParentsPool, SEXP rMaxParentsPool, 
@@ -47,13 +56,13 @@ SEXP searchSA(SEXP rNodeNames, SEXP rSamples, SEXP rPerturbations,
 	SEXP rMaxIter, SEXP rOrderShuffles, SEXP rStopDiff, 
 	SEXP rThreads, SEXP rUseCache, SEXP rEcho);
 SEXP catnetParHistogram(SEXP rSamples, SEXP rPerturbations, 
-	SEXP rMaxParents, SEXP rParentSizes, SEXP rMaxComplexity, SEXP rNodeCats, 
+	SEXP rMaxParents, SEXP rParentSizes, 
+	SEXP rMaxComplexity, SEXP rNodeCats, 
 	SEXP rParentsPool, SEXP rFixedParentsPool, 
 	SEXP rScore, SEXP rWeight, SEXP rMaxIter,
 	SEXP rThreads, SEXP rUseCache, SEXP rEcho);
 SEXP catnetLoglik(SEXP cnet, SEXP rSamples, SEXP rPerturbations, SEXP rBySample);
-SEXP catnetNodeLoglik(SEXP cnet, SEXP rNode, SEXP rSamples, 
-	SEXP rPerturbations, SEXP rKlmode);
+SEXP catnetNodeLoglik(SEXP cnet, SEXP rNode, SEXP rSamples, SEXP rPerturbations, SEXP rKlmode);
 SEXP catnetSetProb(SEXP cnet, SEXP rSamples, SEXP rPerturbations);
 SEXP catnetEntropyPairwise(SEXP rSamples, SEXP rPerturbations);
 SEXP catnetEntropyOrder(SEXP rSamples, SEXP rPerturbations);
@@ -63,7 +72,6 @@ SEXP catnetSamples(SEXP cnet, SEXP rNumSamples, SEXP rPerturbations, SEXP rNaRat
 SEXP catnetReleaseCache();
 SEXP catnetSetSeed(SEXP rSeed);
 SEXP catnetSoftQuant(SEXP rSamples, SEXP rSampleWeights, 
-	SEXP rNumCats, SEXP rLearnset, SEXP rCover, SEXP rMode, 
-	SEXP rMaxiter, SEXP rEps);
+	SEXP rNumCats, SEXP rLearnset, SEXP rCover, SEXP rMode, SEXP rMaxiter, SEXP rEps);
 
 

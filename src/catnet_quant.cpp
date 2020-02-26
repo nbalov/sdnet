@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2019  Nikolay Balov
+ *  Copyright (C) 2009--2010  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
  */
 
 /* 
- * version 2.4.2  20may2019
+ * version 2.4.2  25feb2020
  */
 
 #include "utils.h"
@@ -386,8 +386,7 @@ inline void _umm(double *pdata, double *pSampleWeights, int ndata, int numCats, 
 }
 
 SEXP catnetSoftQuant(SEXP rSamples, SEXP rSampleWeights, 
-	SEXP rNumCats, SEXP rLearnset, SEXP rCover, SEXP rMode, 
-	SEXP rMaxiter, SEXP rEps) {
+	SEXP rNumCats, SEXP rLearnset, SEXP rCover, SEXP rMode, SEXP rMaxiter, SEXP rEps) {
 
 	int gmode, nnode, numSamples, numNodes, *pNumCats, numCats, c, j, maxiter, nLearnset, ndataline, *pLearnset;
 	double *pSamples, *pSampleWeights, *prow, *pdata, fCover, fsum, *pallmu, *pmu, *pallsig, *psig, *pallw, *pw, pp, pmax, feps; 

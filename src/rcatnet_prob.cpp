@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2019  Nikolay Balov
+ *  Copyright (C) 2009--2010  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,11 +24,15 @@
  *      Author: nbalov
  */
 
+/* 
+ * version 2.4.2  25feb2020
+ */
+
 #include "utils.h"
 #include "rcatnet.h"
 
 char *gen_prob_string(int node, SEXP parlist, int paridx, SEXP catlist, SEXP problist, char *str) {
-	int j, npar;
+	int j, npar, nlen;
 	SEXP parprobs, pcats;
 	char *newstr, *aux, *aux2, *aux3;
 
@@ -44,9 +48,9 @@ char *gen_prob_string(int node, SEXP parlist, int paridx, SEXP catlist, SEXP pro
 		newstr = (char*)CATNET_MALLOC(((strlen(str)+1+32)*length(pcats))*sizeof(char));
 		if (!newstr)
 			return str;
-		newstr[0] = 0;
+		nlen = 0;
 		for(j = 0; j < length(pcats); j++) {
-			sprintf(newstr, "%s%s%s %f\n", newstr, str, CHAR(STRING_ELT(pcats, j)), NUMERIC_POINTER(problist)[j]);
+			nlen += sprintf(newstr+nlen, "%s%s %f\n", str, CHAR(STRING_ELT(pcats, j)), NUMERIC_POINTER(problist)[j]);
 		}
 
 		CATNET_FREE(str);
