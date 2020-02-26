@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2011  Nikolay Balov
+ *  Copyright (C) 2009--2019  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ SEXP RCatnetSearchD::estimate(SEXP rSamples, SEXP rPerturbations, SEXP rClasses,
 	if(!isNull(rPerturbations)) {
 		PROTECT(rPerturbations = AS_INTEGER(rPerturbations));
 		pPerturbations = m_pSearchParams->m_pPerturbations;
-		pRperturbations = INTEGER(rPerturbations);
+		pRperturbations = INTEGER_POINTER(rPerturbations);
 		for(j = 0; j < m_numSamples; j++) {
 			for(i = 0; i < m_numNodes; i++) {
 				pPerturbations[j*m_numNodes + i] = pRperturbations[j*m_numNodes + m_pRorder[i] - 1];
@@ -442,7 +442,7 @@ SEXP RDagSearch::estimate(SEXP rSamples, SEXP rPerturbations, SEXP rClasses, SEX
 	if(!isNull(rPerturbations)) {
 		PROTECT(rPerturbations = AS_INTEGER(rPerturbations));
 		pPerturbations = m_pSearchParams->m_pPerturbations;
-		pRperturbations = INTEGER(rPerturbations);
+		pRperturbations = INTEGER_POINTER(rPerturbations);
 		for(j = 0; j < m_numSamples; j++) {
 			for(i = 0; i < m_numNodes; i++) {
 				pPerturbations[j*m_numNodes + i] = pRperturbations[j*m_numNodes + m_pRorder[i] - 1];
@@ -1088,7 +1088,7 @@ Rprintf("RCatnetSearchP\n");
 	if(!isNull(rPerturbations)) {
 		PROTECT(rPerturbations = AS_INTEGER(rPerturbations));
 		pPerturbations = m_pSearchParams->m_pPerturbations;
-		pRperturbations = INTEGER(rPerturbations);
+		pRperturbations = INTEGER_POINTER(rPerturbations);
 		for(j = 0; j < m_numSamples; j++) {
 			for(i = 0; i < m_numNodes; i++) {
 				pPerturbations[j*m_numNodes + i] = pRperturbations[j*m_numNodes + m_pRorder[i] - 1];

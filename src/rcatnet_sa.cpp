@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2010  Nikolay Balov
+ *  Copyright (C) 2009--2020  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,6 +22,10 @@
  *
  *  Created on: Sep 21, 2009
  *      Author: nbalov
+ */
+
+/* 
+ * version 2.4.2  25feb2020
  */
 
 #include "utils.h"
@@ -529,7 +533,7 @@ SEXP RCatnetSearchSA::search(SEXP rNodeNames, SEXP rSamples,
 
 			if (!isNull(rPerturbations)) {
 				pPerturbations = m_pSearchParams[n]->m_pPerturbations;
-				pRperturbations = INTEGER(rPerturbations);
+				pRperturbations = INTEGER_POINTER(rPerturbations);
 				for (j = 0; j < m_numSamples; j++) {
 					for (i = 0; i < m_numNodes; i++)
 						pPerturbations[j * m_numNodes + i] = pRperturbations[j

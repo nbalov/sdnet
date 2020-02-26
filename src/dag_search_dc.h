@@ -1,6 +1,6 @@
 /*
  *  catnet : categorical Bayesian network inference
- *  Copyright (C) 2009--2011  Nikolay Balov
+ *  Copyright (C) 2009--2020  Nikolay Balov
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -986,9 +986,9 @@ public:
 					pDagPars = m_dagPars;
 					pCurDag  = pCurDagList;
 					bSavePars = 0;
-
+int kk=0;
 					while(pCurDag) {
-
+kk++;
 						i = pCurDag->getNumPars(nnode);
 						j = nodecomplx - m_parComplx[nnode][i];
 						if(j <= 0) {
